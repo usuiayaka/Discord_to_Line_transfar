@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   discord-line-bridge:
-    build: .
+    build: ./src
     container_name: discord-line-bridge
     restart: always
     environment:
