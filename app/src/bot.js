@@ -27,7 +27,10 @@ client.on("messageCreate", async (message) => {
   if (!message.mentions.has(client.user)) return;
 
   // ★ メンション部分を削除
-  const cleaned = message.content.replace(`<@${client.user.id}>`, "").trim();
+  const cleaned = message.content
+  .replace(/<@!?(\d+)>/g, "")   // ユーザーへのメンション
+  .replace(/<@&(\d+)>/g, "")    // ロールメンション
+  .trim();
 
   // ★ メンションされている場合だけ、server.js にメッセージを転送
   await axios.post(API_ENDPOINT, {

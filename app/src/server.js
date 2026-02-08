@@ -20,8 +20,7 @@ app.post("/discord-to-line", async (req, res) => {
   // デバッグ用に内容をコンソールに表示
   console.log(text);
 
-  // ★ LINE に転送する処理（今はコメントアウト）
-  /*
+  // ★ LINE に転送する処理
   await axios.post(
     "https://api.line.me/v2/bot/message/push",
     {
@@ -35,7 +34,6 @@ app.post("/discord-to-line", async (req, res) => {
       }
     }
   );
-  */
 
   // Discord 側に「受け取ったよ」と返す
   res.send("ok");
