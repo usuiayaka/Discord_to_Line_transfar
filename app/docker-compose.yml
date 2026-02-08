@@ -1,0 +1,7 @@
+version: "3.9"
+
+services:
+  discord-to-line:
+    build: ./src
+    container_name: discord-to-line
+    restart: unless-stopped
