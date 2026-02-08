@@ -1,11 +1,18 @@
-# ベースイメージ（Node.js想定。後で変更OK）
 FROM node:20-alpine
 
-# 作業ディレクトリ
 WORKDIR /app
 
-# とりあえず何もコピーしない
-# COPY . .
+# package.json と package-lock.json を先にコピー
+COPY package*.json ./
 
-# ダミーで起動し続けるだけ
-CMD ["sh", "-c", "echo 'container started' && sleep infinity"]
+# 依存関係をインストール
+RUN npm install
+
+# 残りのソースコードをコピー
+COPY . .
+
+# Express の API を公開
+EXPOSE 3000
+
+# Node.js アプリを起動
+CMD ["npm", "start"]
