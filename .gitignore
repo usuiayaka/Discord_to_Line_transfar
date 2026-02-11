@@ -23,4 +23,4 @@ dist/
 
 # credentials
 credentials/
-service-acount.json
+!credentials/sample-service-account.json
