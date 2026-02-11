@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 # Express の API を公開
-EXPOSE 3000
+EXPOSE 8080
 
 # Node.js アプリを起動
 CMD ["npm", "start"]
