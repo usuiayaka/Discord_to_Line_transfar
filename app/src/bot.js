@@ -21,21 +21,28 @@ client.on("messageCreate", async (message) => {
   // Bot 自身のメッセージは無視
   if (message.author.bot) return;
 
-  // ★ Bot がメンションされていない場合は無視
-  // 例: @BotName こんにちは → 転送される
-  //     こんにちは → 無視される
-  if (!message.mentions.has(client.user)) return;
+  // ★ Botのみがメンションされているときのみ処理を続行
+  if (
+  !message.mentions.everyone &&          // 全体メンション除外
+  message.mentions.users.size > 0 &&     // 個別メンションあり
+  message.mentions.roles.size === 0      // ロールメンションなし
+  ) 
 
+  // 
+  {
   // ★ メンション部分を削除
   const cleaned = message.content
-  .replace(/<@!?(\d+)>/g, "")   // ユーザーへのメンション
-  .replace(/<@&(\d+)>/g, "")    // ロールメンション
+  .replace(/<@!?(\d+)>/g, "") 
   .trim();
 
-  // ★ メンションされている場合だけ、server.js にメッセージを転送
   await axios.post(API_ENDPOINT, {
     text: cleaned
   });
+  } 
+
+  else {
+    return; // メンションされていない場合は処理を終了
+  }
 });
 
 // Discord にログイン
