@@ -9,6 +9,7 @@ const sheets = google.sheets({ version: "v4", auth });
 
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 
+// TODO:グループIDを自動で書き換える（1グループ専用のまま使いやすくする）か、複数グループに対応させる（追加で仕様検討）
 export async function saveGroupIdToSheet(groupId) {
   const now = new Date().toISOString();
 
@@ -24,6 +25,7 @@ export async function saveGroupIdToSheet(groupId) {
   console.log("Spreadsheet に保存しました:", groupId);
 }
 
+// TODO: ここも複数グループ対応させる場合は、どのグループIDを返すかのロジックが必要
 // GroupID を取得する関数
 export async function getGroupIdFromSheet() {
   const res = await sheets.spreadsheets.values.get({
